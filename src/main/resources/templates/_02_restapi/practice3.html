@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Document</title>
+</head>
+<body>
+    <h1>정보 입력 폼</h1>
+    <form action="/post/practice" method="POST">
+        <label for="name">이름:</label>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="gender">성별:</label>
+        <select id="gender" name="gender" required>
+            <option value="male">남성</option>
+            <option value="female">여성</option>
+            <option value="other">기타</option>
+        </select><br><br>
+
+        <label for="birthdate">생년월일:</label>
+        <input type="date" id="birthdate" name="birthdate" required><br><br>
+
+        <label for="interests">관심사:</label><br>
+        <input type="checkbox" id="interest1" name="interests" value="sports">
+        <label for="interest1">스포츠</label><br>
+        <input type="checkbox" id="interest2" name="interests" value="music">
+        <label for="interest2">음악</label><br>
+        <input type="checkbox" id="interest3" name="interests" value="travel">
+        <label for="interest3">여행</label><br>
+        <input type="checkbox" id="interest4" name="interests" value="reading">
+        <label for="interest4">독서</label><br><br>
+
+        <input type="submit" value="제출">
+    </form>
+
+    <h2>입력한 정보</h2>
+    <div  th:if="${userForm != null}">
+        <p>이름: <span th:text="${userForm.name}"></span></p>
+        <p>성별: <span th:text="${userForm.gender}"></span></p>
+        <p>생년월일: <span th:text="${userForm.birthdate}"></span></p>
+        <p>관심사:
+            <span th:each="interest : ${userForm.interests}" th:text="${interest} + (interest.last ? '' : ', ')"></span>
+        </p>
+    </div>
+</body>
+</html>
